@@ -1,0 +1,41 @@
+<!-- templates/home.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+  <title>Pagination system</title>
+</head>
+<body>
+
+  <div class='container'>
+    <div class='mt-5 pt-5 ml-5 pl-5'>
+      <p><strong>Username:</strong></p>
+      {% for user in object_list %}
+      <p>{{ user.username }}</p>
+      {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    <div class='pagination justify-content-center'>
+      {% if page_obj.has_previous %}
+        <a href='{% url "list_users" %}?page={{ page_obj.previous_page_number }}'>Previous </a>
+      {% endif %}
+
+      <span class='mx-4'>
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+      </span>
+
+      {% if page_obj.has_next %}
+        <a href='{% url "list_users" %}?page={{ page_obj.next_page_number }}' > Next</a>
+      {% endif %}
+    </div>
+    <!-- END Pagination -->
+  </div>
+
+</body>
+</html>
